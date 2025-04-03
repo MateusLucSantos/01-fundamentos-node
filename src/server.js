@@ -1,22 +1,21 @@
 import http from 'http'
-const users = [];
+import { json } from './middlewares/json.js';
+import { Database } from './database.js';
+import { routes } from './routes.js';
 
-const server = http.createServer((req, res) => {
+const database = new Database
+
+const server = http.createServer(async (req, res) => {
     const { method, url } = req
 
-    if (method === 'GET' && url === '/users') {
-        return res
-            .setHeader('Content-type', 'application/json')
-            .end(JSON.stringify(users))
-    }
+    await json(req, res)
 
-    if (method === 'POST' && url === '/users') {
-        users.push({
-            id: 1,
-            name: 'Mateus Santos',
-            email: 'johndoe@example.com'
-        })
-        return res.writeHead(201).end()
+    const route = routes.find(route => {
+        return route.method === method && route.path === url
+    })
+
+    if (route) {
+        return route.handler(req, res)
     }
 
     return res.writeHead(404).end()
