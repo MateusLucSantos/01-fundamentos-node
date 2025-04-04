@@ -1,1 +1,19 @@
-{"users":[{"id":"d0d8b675-7f70-41e2-85c4-a84995c718a7","name":"Mateus Santos","email":"mateussatnos@exemplo.com"},{"id":"b5ef037a-a01b-42d5-9919-d1fad5e5fb1d","name":"Mateus Santos","email":"mateussatnos@exemplo.com"}]}
+{
+  "users": [
+    {
+      "id": "d0d8b675-7f70-41e2-85c4-a84995c718a7",
+      "name": "Mateus Santos",
+      "email": "mateussatnos@exemplo.com"
+    },
+    {
+      "id": "b5ef037a-a01b-42d5-9919-d1fad5e5fb1d",
+      "name": "Mateus Santos",
+      "email": "mateussatnos@exemplo.com"
+    },
+    {
+      "id": "61d24ec1-a269-4f49-a2c7-6b4e0fb78fda",
+      "name": "Mateus Santos",
+      "email": "mateussantos@exemplo.com"
+    }
+  ]
+}

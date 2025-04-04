@@ -1,24 +1,25 @@
-import http from 'http'
-import { json } from './middlewares/json.js';
-import { Database } from './database.js';
-import { routes } from './routes.js';
+import http from "http";
+import { json } from "./middlewares/json.js";
+import { Database } from "./database.js";
+import { routes } from "./routes.js";
 
-const database = new Database
+const database = new Database();
 
 const server = http.createServer(async (req, res) => {
-    const { method, url } = req
+  const { method, url } = req;
 
-    await json(req, res)
+  await json(req, res);
 
-    const route = routes.find(route => {
-        return route.method === method && route.path === url
-    })
+  const route = routes.find((route) => {
+    return route.method === method && route.path.test(url);
+  });
 
-    if (route) {
-        return route.handler(req, res)
-    }
+  if (route) {
+    const routeParams = req.url.match(route.path);
+    return route.handler(req, res);
+  }
 
-    return res.writeHead(404).end()
-})
+  return res.writeHead(404).end();
+});
 
-server.listen(3333)
+server.listen(3333);
